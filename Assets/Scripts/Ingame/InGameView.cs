@@ -117,7 +117,7 @@ public class InGameView : MonoBehaviour
     {
         if(gestureData.type == ProtoGestureType.Swipe)
         {
-            if(gestureData.endPosition.y >= ConstVariables.swipeAreaPercent*Screen.width && isPizzaSwiping == false)
+            if(gestureData.endPosition.y >= ConstVariables.swipeAreaPercent*Screen.height && isPizzaSwiping == false)
             {
                 isPizzaSwiping = true;
                 guideLoop.SetActive(false);

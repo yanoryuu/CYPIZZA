@@ -13,6 +13,6 @@ public static class ConstVariables
     
     public const float timeLimit = 30f; // 制限時間
     
-    public const float swipeAreaPercent = 0.75f;
+    public const float swipeAreaPercent = 0.9f;
 }
 

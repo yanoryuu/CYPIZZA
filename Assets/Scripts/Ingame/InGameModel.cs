@@ -195,9 +195,6 @@ public class InGameModel
 
         //最大拡大率再設定
         limitScale.Value = Random.Range(1.5f, 3);
-        
-        //アンカー初期化
-        currentAncorIndex.Value = 0;
     }
     
     // 初期化
