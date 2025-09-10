@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectPresenter : MonoBehaviour
+public class SelectPresenter
 {
-    // Start is called before the first frame update
-    void Start()
+    public SelectPresenter()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Bind()
     {
         
     }
+    
+    public void Initialize()
+    {
+        
+    }
+    
 }
