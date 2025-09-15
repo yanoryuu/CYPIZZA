@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using Cysharp.Threading.Tasks;
+using R3;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,8 @@ public class SelectPresenter : IPresenter
             Debug.Log("click exit");
             SoundManager.I.PlaySE(SoundManager.I.buttonClickClip);
             //stateManager.ApplyState(State.Title);
-        });
+        })
+            .AddTo(disposables);
     }
 
     public void Enter()
