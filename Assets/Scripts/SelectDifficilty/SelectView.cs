@@ -20,7 +20,7 @@ public class SelectView : MonoBehaviour
         for (int i = 0; i < difficultyCards.Length; i++)
         {
             OnDifficultyButtons[i] = new Subject<Mode>();
-            int index = i; // ƒNƒ[ƒWƒƒ‘Îô
+            int index = i; // ã‚¯ãƒ­ãƒ¼ã‚¸ãƒ£å¯¾ç­–
             difficultyCards[i].Button.onClick.AddListener(() => {
                 OnDifficultyButtons[index].OnNext(difficultyCards[index].GetMode());
                 });
