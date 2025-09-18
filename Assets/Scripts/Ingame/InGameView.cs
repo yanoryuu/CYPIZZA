@@ -97,8 +97,8 @@ public class InGameView : MonoBehaviour
 
     public void MakeBigPizza(float pizzaSize)
     {
-        pizzaTransform.DOScale(pizzaSize, 0.2f)
-        .SetAutoKill(true);
+        pizzaTransform.DOScale(pizzaSize, 0.2f);
+        //.SetAutoKill(true);
     }
 
     public void MakeRotatePizza(float bigspeed)
@@ -134,6 +134,7 @@ public class InGameView : MonoBehaviour
         pizzaTransform.DOMoveY(3000f, 0.6f).OnComplete(() =>
             {
                 pizzaTransform.position = pizzaStartPos + new Vector3(1000f, 0f, 0f);
+                pizzaTransform.DOKill();
                 pizzaTransform.DOMove(pizzaStartPos, 1f).SetDelay(0.1f).OnComplete(() => 
                 {
                     isPizzaSwiping = false;
