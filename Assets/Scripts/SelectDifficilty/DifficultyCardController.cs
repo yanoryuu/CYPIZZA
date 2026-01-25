@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,10 +12,10 @@ public class DifficultyCardController : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     public Button Button;
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“‘O‚ÌˆÊ’u
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‰ã®ä½ç½®
     private Vector3 beforePosition;
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“Œã‚ÌˆÊ’u
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å¾Œã®ä½ç½®
     private Vector3 afterPosition;
 
     public Mode GetMode()
@@ -30,10 +30,10 @@ public class DifficultyCardController : MonoBehaviour
         beforePosition = new Vector3(afterPosition.x + 1500f, afterPosition.y, afterPosition.z);
     }
 
-    // “ü‚éƒAƒjƒ[ƒVƒ‡ƒ“
+    // å…¥ã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     public async UniTask PlayInAnimation(float delaySecond = 0)
     {
-        // ‰ŠúˆÊ’u‚ğƒŠƒZƒbƒg
+        // åˆæœŸä½ç½®ã‚’ãƒªã‚»ãƒƒãƒˆ
         contentTransform.localPosition = beforePosition;
         canvasGroup.alpha = 0f;
 
@@ -46,11 +46,11 @@ public class DifficultyCardController : MonoBehaviour
         seqIn.Join(canvasGroup.DOFade(1f, 0.5f).SetEase(Ease.Linear));
         await seqIn.Play().AsyncWaitForCompletion();
 
-        // –³ŒÀ‚É—h‚ç‚·ƒAƒjƒ[ƒVƒ‡ƒ“
+        // ç„¡é™ã«æºã‚‰ã™ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
         contentTransform.DOLocalMoveX(afterPosition.x + 10f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic);
     }
 
-    // o‚éƒAƒjƒ[ƒVƒ‡ƒ“
+    // å‡ºã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     public async UniTask PlayOutAnimation()
     {
         contentTransform.DOKill();
