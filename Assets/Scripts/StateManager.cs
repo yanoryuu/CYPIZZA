@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ausing Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ public class StateManager : MonoBehaviour
 
     [SerializeField] private GameObject titlePanel;
     public IPresenter titlePresenter;
-    [SerializeField] private GameObject selectStagePanel;
-    public IPresenter selectStagePresenter;
+    // [SerializeField] private GameObject selectStagePanel;
+    // public IPresenter selectStagePresenter;
     [SerializeField] private GameObject inGamePanel;
     public IPresenter inGamePresenter;
     [SerializeField] private GameObject resultPanel;
@@ -48,29 +48,29 @@ public class StateManager : MonoBehaviour
         {
             case State.Title:
                 titlePanel.SetActive(true);
-                selectStagePanel.SetActive(false);
+                // selectStagePanel.SetActive(false);
                 inGamePanel.SetActive(false);
                 resultPanel.SetActive(false);
                 titlePresenter.Enter();
                 break;
-            case State.SelectStage:
+            /*case State.SelectStage:
                 titlePanel.SetActive(false);
                 selectStagePanel.SetActive(true);
                 inGamePanel.SetActive(false);
                 resultPanel.SetActive(false);
                 transitionPanel.SetActive(false);
                 selectStagePresenter.Enter();
-                break;
+                break;*/
             case State.InGame:
                 titlePanel.SetActive(false);
-                selectStagePanel.SetActive(false);
+                // selectStagePanel.SetActive(false);
                 inGamePanel.SetActive(true);
                 resultPanel.SetActive(false);
                 inGamePresenter.Enter();
                 break;
             case State.Result:
                 titlePanel.SetActive(false);
-                selectStagePanel.SetActive(false);
+                // selectStagePanel.SetActive(false);
                 inGamePanel.SetActive(false);
                 resultPanel.SetActive(true);
                 resultPresenter.Enter();
@@ -82,7 +82,7 @@ public class StateManager : MonoBehaviour
 public enum State
 {
     Title,
-    SelectStage,
+    /*SelectStage,*/
     InGame,
     Result
 }
