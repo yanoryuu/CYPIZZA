@@ -16,7 +16,6 @@ public class RandomImage : MonoBehaviour
 
     public int setRandomImage()
     {
-        Debug.Log(imageList.getImageList().Length);
         int index = Random.Range(0, imageList.getImageList().Length);
         image.sprite = imageList.getImageList()[index];
         return index;

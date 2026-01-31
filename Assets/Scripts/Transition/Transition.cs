@@ -12,6 +12,7 @@ public class Transition : MonoBehaviour
     [SerializeField] private Image Peel;
     [SerializeField] private Image Pizza;
     [SerializeField] private RandomImage PizzaImage;
+    [SerializeField] private RandomImage RandomImage;
 
     // 最終的に移動する位置
     private Vector3 fixedPanelPosition;
@@ -53,6 +54,9 @@ public class Transition : MonoBehaviour
         panelRect.DOKill();
         peelRect.DOKill();
         pizzaRect.DOKill();
+
+        // 画像をランダムに指定
+        RandomImage.setRandomImage();
 
         // 無限回転
         pizzaRect.DOLocalRotate(new Vector3(0, 0, -360), 10f, RotateMode.LocalAxisAdd)
