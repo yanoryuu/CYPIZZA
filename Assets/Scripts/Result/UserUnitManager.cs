@@ -8,7 +8,7 @@ public class UserUnitManager : MonoBehaviour
     [SerializeField] private GameObject UserUnit;
     [SerializeField] private int gapY = 100;
 
-    public void SetUserUnit(UserData[] users)
+    public void SetUserUnit(List<UserData> users)
     {
         foreach (Transform child in this.transform)
         {
@@ -16,11 +16,11 @@ public class UserUnitManager : MonoBehaviour
         }
 
         if (users == null) return;
-        if (users.Length == 0) return;
+        if (users.Count == 0) return;
 
         //users.Reverse();
 
-        for (int i = 0; i < users.Length; i++)
+        for (int i = 0; i < users.Count; i++)
         {
             GameObject userUnit = Instantiate(UserUnit, transform);
             UserUnitController controller = userUnit.GetComponent<UserUnitController>();

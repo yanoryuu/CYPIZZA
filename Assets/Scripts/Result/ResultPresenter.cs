@@ -46,7 +46,20 @@ public class ResultPresenter : IPresenter
     public async void Enter()
     {
         Debug.Log(inGameModel.pizzaCount.Value);
-        var usersData = await rankingLoader.ResultScore(inGameModel.pizzaCount.Value, startModel.userName);
+        
+        var score = inGameModel.pizzaCount.Value;
+        var name = startModel.userName;
+
+        var usersData = RankingManager.Instance.GetRankingList();
+
+        if (RankingManager.Instance.IsRankIn(score))
+        {
+            RankingManager.Instance.AddScore(name,score);
+            usersData = RankingManager.Instance.GetRankingList();
+            RankingManager.Instance.SaveRanking();
+        }
+        
+        // var usersData = await rankingLoader.ResultScore(inGameModel.pizzaCount.Value, startModel.userName);
         resultView.SetScore(inGameModel.pizzaCount.Value);
         resultView.SetUsersData(usersData);
         resultView.StartAnim();

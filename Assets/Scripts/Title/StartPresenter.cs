@@ -30,17 +30,13 @@ public class StartPresenter : IPresenter
             .AddTo(disposables);
         
         //設定
-        
-        // startView.OnOptionButton.Subscribe(_ =>
-        //     {
-        //         Debug.Log("click option");
-        //     })
-        //     .AddTo(disposables);
         startView.OnInputField.Subscribe(name =>
         {
             Debug.Log($"input {name}");
             startModel.SetUserName(name);
         });
+        
+        Enter();
     }
     
     public void Enter()

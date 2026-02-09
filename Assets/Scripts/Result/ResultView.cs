@@ -43,7 +43,7 @@ public class ResultView : MonoBehaviour
         initScoreRotate = fixedScoreRotate + new Vector3(0, 0, -90);
     }
 
-    public void SetUsersData(UserData[] usersData)
+    public void SetUsersData(List<UserData> usersData)
     {
         UserUnitManager.SetUserUnit(usersData);
     }
