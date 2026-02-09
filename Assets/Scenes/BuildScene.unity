@@ -3852,7 +3852,7 @@ MonoBehaviour:
   UserUnitManager: {fileID: 1152380553}
   retryButton: {fileID: 1602353192}
   exitButton:
-  - {fileID: 1602353192}
+  - {fileID: 614360222}
   - {fileID: 413135581}
   BackPizza: {fileID: 1566798864}
   scoreText: {fileID: 162502646}
@@ -7925,6 +7925,7 @@ MonoBehaviour:
   Peel: {fileID: 288552812}
   Pizza: {fileID: 1022389512}
   PizzaImage: {fileID: 1022389511}
+  RandomImage: {fileID: 1022389511}
 --- !u!4 &1755535933
 Transform:
   m_ObjectHideFlags: 0
