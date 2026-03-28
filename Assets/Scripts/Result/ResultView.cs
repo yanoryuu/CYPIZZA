@@ -32,15 +32,21 @@ public class ResultView : MonoBehaviour
         {
             exitButton.onClick.AddListener(() => { onExitButtonClicked.OnNext(Unit.Default); });
         }
+
+        fixedScoreScale = Vector3.one;
+        fixedScoreRotate = scoreText.transform.localEulerAngles;
+
+        initScoreScale = Vector3.zero;
+        initScoreRotate = fixedScoreRotate + new Vector3(0, 0, 180);
     }
 
     private void Start()
     {
-        fixedScoreScale = scoreText.transform.localScale;
-        fixedScoreRotate = scoreText.transform.localEulerAngles;
+        //fixedScoreScale = Vector3.one;
+        //fixedScoreRotate = scoreText.transform.localEulerAngles;
 
-        initScoreScale = Vector3.zero;
-        initScoreRotate = fixedScoreRotate + new Vector3(0, 0, -90);
+        //initScoreScale = Vector3.zero;
+        //initScoreRotate = fixedScoreRotate + new Vector3(0, 0, -90);
     }
 
     public void SetUsersData(List<UserData> usersData)
@@ -61,6 +67,9 @@ public class ResultView : MonoBehaviour
 
         scoreRect.localScale = initScoreScale;
         var sequence = DOTween.Sequence();
+
+        sequence.AppendInterval(1f);
+
         sequence.Append(scoreRect.DOScale(fixedScoreScale, .5f).SetEase(Ease.OutBack));
         sequence.Join(scoreRect.DORotate(fixedScoreRotate, .5f).SetEase(Ease.OutBounce));
 
