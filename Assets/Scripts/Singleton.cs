@@ -4,7 +4,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
     private static readonly object _lock = new object();
-    private static bool _applicationIsQuitting;
+    private static bool _applicationIsQuitting = false;
 
     public static T Instance
     {
@@ -25,7 +25,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     {
                         GameObject singletonObject = new GameObject();
                         _instance = singletonObject.AddComponent<T>();
-                        singletonObject.name = typeof(T) + " (Singleton)";
+                        singletonObject.name = typeof(T).ToString() + " (Singleton)";
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
@@ -53,4 +53,3 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         _applicationIsQuitting = true;
     }
 }
-

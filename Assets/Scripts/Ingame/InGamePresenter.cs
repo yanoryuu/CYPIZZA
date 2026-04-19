@@ -41,7 +41,6 @@ public class InGamePresenter : IPresenter
         inGameModel.pizzaScale
             .Subscribe(scale =>
             {
-                Debug.Log(scale);
                 inGameView.MakeBigPizza(scale);
             })
             .AddTo(disposables);
@@ -99,15 +98,12 @@ public class InGamePresenter : IPresenter
         ingameDisposables = new CompositeDisposable();
         
         Observable.EveryUpdate()
-            .Subscribe(_ => inGameModel.ChangeTime(Time.deltaTime))
-            .AddTo(ingameDisposables);
-        
-        Observable.EveryUpdate()
-            .Subscribe(_=>inGameModel.DelayRotatePizzaSpeed(0.0003f))
-            .AddTo(ingameDisposables);
-        
-        Observable.EveryUpdate()
-            .Subscribe(_=>inGameModel.TickScalingByFrame())
+            .Subscribe(_ =>
+            {
+                inGameModel.ChangeTime(Time.deltaTime);
+                inGameModel.DelayRotatePizzaSpeed(0.0003f);
+                inGameModel.TickScalingByFrame();
+            })
             .AddTo(ingameDisposables);
         
         inGameModel.currentAncorIndex.Subscribe(index => inGameView.MoveAnchor(index))

@@ -38,8 +38,8 @@ public class InGameModel
         currentRestTime        = new ReactiveProperty<float>();
         currentAncorIndex  = new ReactiveProperty<int>();
         oneLapTime         = new ReactiveProperty<float>();
-        pizzaRotateSpeed   = new ReactiveProperty<float>();
-        pizzaScale         = new ReactiveProperty<float>();
+        pizzaRotateSpeed   = new ReactiveProperty<float>(1f);
+        pizzaScale         = new ReactiveProperty<float>(1f);
         limitScale         = new ReactiveProperty<float>();
         pizzaCount         = new ReactiveProperty<int>();
     }
@@ -84,12 +84,13 @@ public class InGameModel
     {
         if (!HasAnchors) return;
 
-        currentAncorIndex.Value++;
-        if (currentAncorIndex.Value >= anchors.Count)
+        int nextIndex = currentAncorIndex.Value + 1;
+        if (nextIndex >= anchors.Count)
         {
             OnFinishedOneLap.OnNext(Unit.Default);
-            currentAncorIndex.Value = 0;
+            nextIndex = 0;
         }
+        currentAncorIndex.Value = nextIndex;
         Debug.Log($"[InGameModel] next anchor: {currentAncorIndex.Value}/{anchors.Count}");
     }
 
@@ -110,26 +111,23 @@ public class InGameModel
         oneLapTime.Value  += time;
     }
     
-    // ピザ拡大
+    // ピザ拡大（一周完了で速度が付いた時のみ拡大）
     public void TickScalingByFrame()
     {
-        // pizzaRotateSpeed をそのまま拡大速度に利用
         float currSpeed = pizzaRotateSpeed.Value;
 
-        // スピードに比例した増分
-        float delta = currSpeed * Time.deltaTime * 0.15f;
-        
-        if (delta > 0f)
-        {
-            pizzaScale.Value += delta;
-        }
+        // 初期速度（1以下）では拡大しない。一周して加速された分だけ拡大する
+        if (currSpeed <= 1f) return;
+
+        float delta = (currSpeed - 1f) * Time.deltaTime * 1.5f;
+        pizzaScale.Value += delta;
     }
 
     //　速度遅くする。
     public void DelayRotatePizzaSpeed(float bigspeed)
     {
         pizzaRotateSpeed.Value -= bigspeed;
-        pizzaRotateSpeed.Value = Mathf.Clamp(pizzaRotateSpeed.Value, 1, 100f);
+        pizzaRotateSpeed.Value = Mathf.Clamp(pizzaRotateSpeed.Value, 1f, 100f);
     }
 
     public float UpdateSpeedByLap(float currLapTime, float currentSpeed)
@@ -147,7 +145,7 @@ public class InGameModel
         if (isFast)
         {
             // 加速
-            targetSpeed = currentSpeed * Mathf.Pow(1.2f, k); // 倍率は調整可
+            targetSpeed = currentSpeed * Mathf.Pow(1.5f, k); // 倍率は調整可
         }
         else
         {
@@ -160,7 +158,7 @@ public class InGameModel
         float newSpeed = Mathf.Lerp(currentSpeed, targetSpeed, alpha);
 
         // ---- 範囲制限 ----
-        newSpeed = Mathf.Clamp(newSpeed, 1, 100);
+        newSpeed = Mathf.Clamp(newSpeed, 1f, 100);
 
         return newSpeed;
     }
@@ -187,10 +185,11 @@ public class InGameModel
     // ピザ完成時の初期化
     public void InitializePizza()
     {
-        //回転速度初期化
-        pizzaRotateSpeed.Value = 0;
+        //回転速度初期化（初期速度1 = 拡大しない基準値）
+        pizzaRotateSpeed.Value = 1f;
         
-        //サイズ初期化
+        //サイズ初期化（同値でも通知されるよう微小にずらす）
+        pizzaScale.Value = 0.999f;
         pizzaScale.Value = 1f;
 
         //最大拡大率再設定
@@ -204,10 +203,10 @@ public class InGameModel
         currentRestTime.Value       = 0;
         oneLapTime.Value        = 0;
         currentAncorIndex.Value = HasAnchors ? Mathf.Clamp(currentAncorIndex.Value, 0, anchors.Count - 1) : 0;
-        pizzaRotateSpeed.Value  = 1f; // 初期速度
         pizzaScale.Value       = 1f; // 初期サイズ
         currentRestTime.Value = ConstVariables.timeLimit; // 制限時間セット
         InitializePizza();
+        pizzaRotateSpeed.Value  = 1f; // 初期速度（InitializePizzaの後に設定）
         Debug.Log("[InGameModel] Initialize done");
     }
 }

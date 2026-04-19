@@ -6,7 +6,7 @@ public static class ConstVariables
 {
     // スクリーン座標でのヒット判定ピクセル閾値
     public const float anchorHitThresholdPx = 200f;
-    public const float targetLapTime = 1f;
+    public const float targetLapTime = 3;
     
     public const float minScaleThresholdForScale = 0.9f; // ピザの有効幅
     public const float maxScaleThresholdForScale = 1.1f;
@@ -14,6 +14,10 @@ public static class ConstVariables
     public const float timeLimit = 30f; // 制限時間
     
     public const float swipeAreaPercent = 0.9f;
+    
+    // 自前スワイプ検出パラメータ
+    public const float swipeMinDistancePx = 120f;        // 上方向に最低120px移動
+    public const float swipeMinSpeedPxPerSec = 800f;     // 最低速度 800px/秒
     
     public static ModeParameter easyModeParameter = new ModeParameter(30, 0.9f, 1.1f);
     public static ModeParameter normalModeParameter = new ModeParameter(30, 0.9f, 1.1f);
